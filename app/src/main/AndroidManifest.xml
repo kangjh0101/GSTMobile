@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gst.matchfinder">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- this is for brief location -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/gst_155x155_01"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_sercurity_config"
+        android:roundIcon="@drawable/gst_155x155_01"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.lesson.LessonLocationActivity"></activity>
+        <activity android:name=".ui.lesson.LessonInfoDetailActivity" />
+        <activity android:name=".ui.lesson.LessonInfoActivity" />
+        <activity android:name=".ui.main.MainMenuV2Activity" /> <!-- android:launchMode="singleInstance" -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-2436476461762188~4236044740" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/test_icon_small" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/maps_api_key" />
+
+        <activity
+            android:name=".ui.bug_report.BugReportActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.main.MainMenuActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.wanted.MyWantedDetailActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.message.ViewMessageActivity"
+            android:label="@string/app_name" />
+        <!--
+android:launchMode="singleInstance"
+            android:launchMode="singleTop"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+        -->
+        <activity
+            android:name=".ui.message.MessageBoxActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.wanted.MyWantedAdListActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.wanted.WantedDetailActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.wanted.WantedAdActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name=".ui.register.RegisterMyLocation"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.main.MainPageActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.login.LoginPageActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.findIDPW.FindIDPWActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.register.RegisterActivityScroll"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service android:name=".ui.message.GSTFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#90D400"
+    tools:context=".ui.lesson.LessonLocationActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/lessonLocationNestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/lessonLocationConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="411dp"
+                android:layout_height="99dp"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:src="@drawable/grandslam_2nd_note_2440x1080px_r144_g212_b0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lesson_ad_request"
+                android:textColor="#FF0000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView1" />
+
+            <Button
+                android:id="@+id/seoul_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:background="#F4BD27"
+                android:text="서울 레슨"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <Button
+                android:id="@+id/daegu_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:background="#F4BD27"
+                android:text="대구 레슨"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/seoul_btn"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <Button
+                android:id="@+id/busan_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#F4BD27"
+                android:text="부산 레슨"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/seoul_btn" />
+
+            <Button
+                android:id="@+id/ulsan_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#F4BD27"
+                android:textColor="#FFFFFF"
+                android:text="울산 레슨"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/seoul_btn"
+                app:layout_constraintTop_toBottomOf="@+id/seoul_btn" />
+
+            <Button
+                android:id="@+id/inchon_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#F4BD27"
+                android:text="인천 레슨"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/busan_btn" />
+
+            <Button
+                android:id="@+id/daejon_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#F4BD27"
+                android:textColor="#FFFFFF"
+                android:text="대전 레슨"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/seoul_btn"
+                app:layout_constraintTop_toBottomOf="@+id/busan_btn" />
+
+            <Button
+                android:id="@+id/gwangju_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#F4BD27"
+                android:text="광주 레슨"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inchon_btn" />
+
+            <Button
+                android:id="@+id/jeju_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#F4BD27"
+                android:textColor="#FFFFFF"
+                android:text="제주 레슨"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/seoul_btn"
+                app:layout_constraintTop_toBottomOf="@+id/inchon_btn" />
+
+            <Button
+                android:id="@+id/gyunggi_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#F4BD27"
+                android:text="경기 레슨"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gwangju_btn" />
+
+            <Button
+                android:id="@+id/gangwon_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#F4BD27"
+                android:textColor="#FFFFFF"
+                android:text="강원 레슨"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/seoul_btn"
+                app:layout_constraintTop_toBottomOf="@+id/gwangju_btn" />
+
+            <Button
+                android:id="@+id/chungbuk_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#F4BD27"
+                android:text="충북 레슨"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gyunggi_btn" />
+
+            <Button
+                android:id="@+id/chungnam_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#F4BD27"
+                android:textColor="#FFFFFF"
+                android:text="충남 레슨"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/seoul_btn"
+                app:layout_constraintTop_toBottomOf="@+id/gyunggi_btn" />
+
+            <Button
+                android:id="@+id/junbuk_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#F4BD27"
+                android:text="전북 레슨"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chungbuk_btn" />
+
+            <Button
+                android:id="@+id/junnam_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#F4BD27"
+                android:textColor="#FFFFFF"
+                android:text="전남 레슨"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/seoul_btn"
+                app:layout_constraintTop_toBottomOf="@+id/chungbuk_btn" />
+
+            <Button
+                android:id="@+id/gyungbuk_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#F4BD27"
+                android:text="경북 레슨"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/junbuk_btn" />
+
+            <Button
+                android:id="@+id/gyungnam_btn"
+                android:layout_width="136dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:background="#F4BD27"
+                android:textColor="#FFFFFF"
+                android:text="경남 레슨"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/seoul_btn"
+                app:layout_constraintTop_toBottomOf="@+id/junbuk_btn" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

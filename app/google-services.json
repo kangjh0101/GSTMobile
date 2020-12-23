@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1012379264387",
+    "firebase_url": "https://matchfindergrandslamtennis.firebaseio.com",
+    "project_id": "matchfindergrandslamtennis",
+    "storage_bucket": "matchfindergrandslamtennis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012379264387:android:131edfffb8027801dc42b6",
+        "android_client_info": {
+          "package_name": "com.gst.matchfinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1012379264387-tb53c97uj7btu9tgs9lapvle397h0bor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYxwkl2qMhnUCh2FAiSJBx9uOt9YJ0noo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1012379264387-tb53c97uj7btu9tgs9lapvle397h0bor.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

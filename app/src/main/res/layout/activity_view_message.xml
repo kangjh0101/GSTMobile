@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textAlignment="center"
+    tools:context=".ui.message.ViewMessageActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/msgViewConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animationCache="true"
+            android:background="#B4B5CD"
+            android:fitsSystemWindows="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <ListView
+                android:id="@+id/viewMessageListView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="#DDF0FA"
+                app:layout_constraintBottom_toTopOf="@+id/send_message_input"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></ListView>
+
+            <EditText
+                android:id="@+id/send_message_input"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="3dp"
+                android:background="#FFFFFF"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                app:layout_constraintBottom_toTopOf="@+id/send_message_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <!--<Button
+                android:id="@+id/send_message_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#0088FF"
+                android:text="  메세지 보내기  "
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+            </Button>-->
+
+            <ImageButton
+                android:id="@+id/send_message_btn"
+                android:layout_width="91dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="10dp"
+                android:adjustViewBounds="true"
+                android:background="#B4B5CD"
+                android:scaleType="fitCenter"
+                android:scaleX="1.1"
+                android:scaleY="1.1"
+                android:src="@drawable/send_msg_r_a_note_2440x1080_r219_g93_b162"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!--<Button
+                android:id="@+id/exit_message_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#00FF99"
+                android:text="  이 채팅에서 나가기  "
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+            </Button>-->
+
+            <ImageButton
+                android:id="@+id/exit_message_btn"
+                android:layout_width="91dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="10dp"
+                android:adjustViewBounds="true"
+                android:background="#B4B5CD"
+                android:scaleType="fitCenter"
+                android:scaleX="1.1"
+                android:scaleY="1.1"
+                android:src="@drawable/exit_msg_r_a_note_2440x1080_r179_g142_b193"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/block_user_btn"
+                android:layout_width="71dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/block_button_bg"
+                android:text="메세지 차단"
+                android:textSize="12sp"
+                android:textStyle="bold|italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/exit_message_btn">
+
+            </Button>
+
+            <!--<ImageButton
+                android:id="@+id/block_user_btn"
+                android:layout_width="91dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="10dp"
+                android:adjustViewBounds="true"
+                android:background="#B4B5CD"
+                android:scaleType="fitCenter"
+                android:scaleX="1.1"
+                android:scaleY="1.1"
+                android:src="@drawable/block_msg_r_c_note_2440x1080_r143_g161_b200"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/exit_message_btn" />-->
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--<ListView
+            android:id="@+id/viewMessageListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"></ListView>-->
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

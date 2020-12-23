@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">GrandSlam Tennis</string>
+    <string name="prompt_id">ID</string>
+    <string name="action_sign_in">로그인하기</string>
+    <string name="action_register">가입하기</string>
+    <string name="action_find_idpw">ID / PW 찾기</string>
+    <string-array name="ntrp_array">
+        <item>"NTRP"</item>
+        <item>"1.0"</item>
+        <item>"1.5"</item>
+        <item>"2.0"</item>
+        <item>"2.5"</item>
+        <item>"3.0"</item>
+        <item>"3.5"</item>
+        <item>"4.0"</item>
+        <item>"4.5"</item>
+        <item>"5.0"</item>
+    </string-array>
+    <string-array name="search_ntrp_array">
+        <item>"NTRP"</item>
+        <item>"2.0 이하"</item>
+        <item>"2.0 - 3.0"</item>
+        <item>"3.0 - 4.0"</item>
+        <item>"4.0 - 5.0"</item>
+        <item>"5.0 이상"</item>
+        <item>"무관"</item>
+    </string-array>
+    <string-array name="search_gender_array">
+        <item>"성별"</item>
+        <item>"남"</item>
+        <item>"여"</item>
+        <item>"무관"</item>
+    </string-array>
+    <string-array name="search_howlong_array">
+        <item>"구력"</item>
+        <item>"1년 이하"</item>
+        <item>"1년 - 3년"</item>
+        <item>"3년 - 5년"</item>
+        <item>"5년 이상"</item>
+        <item>"무관"</item>
+    </string-array>
+    <string-array name="search_court_book_array">
+        <item>"코트 예약"</item>
+        <item>"예약한 코트 있는 회원만 검색"</item>
+        <item>"예약한 코트 없는 회원만 검색"</item>
+        <item>"무관"</item>
+    </string-array>
+    <string-array name="wanted_court_book_array">
+        <item>"코트 예약"</item>
+        <item>"예약한 코트 있음"</item>
+        <item>"예약한 코트 없음"</item>
+    </string-array>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="title_activity_find_i_d_p_w">FindIDPWActivity</string>
+    <string-array name="find_idpw_tab_names">
+        <item>"사용자 ID 찾기"</item>
+        <item>"Password 찾기"</item>
+    </string-array>
+
+    <!-- Find ID / PW fail message -->
+    <string name="no_name">"해당 사용자를 찾을수 없습니다"</string>
+    <string name="no_id">"해당 ID를 찾을 수 없습니다"</string>
+    <string name="name_phone_not_match">"사용자 이름과 전화번호가 일치하지 않습니다"</string>
+    <string name="id_phone_not_match">"사용자 ID와 전화번호가 일치하지 않습니다"</string>
+
+    <string name="default_notification_channel_id" translatable="false">gst_default_channel</string>
+    <string name="default_notification_channel_name" translatable="true">New_Message</string>
+    <string name="gst_message">메세지가 도착했습니다</string>
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+
+    <string name="bug_report_warning">욕설 또는 비방을 자제해 주시기 바랍니다.\n사용이 제한될 수 있습니다.\n\n안드로이드 버전을 꼭!!! 기록해 주세요.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lesson_ad_request">레슨 광고를 원하시는 코치님께서는\ngst.grandslamtennis@gmail.com\n으로 문의 주시기 바랍니다</string>
+</resources>
