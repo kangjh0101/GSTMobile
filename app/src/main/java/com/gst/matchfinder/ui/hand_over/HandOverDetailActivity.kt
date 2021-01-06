@@ -1,20 +1,17 @@
-package com.gst.matchfinder.ui.lesson
+package com.gst.matchfinder.ui.hand_over
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Base64
-import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 import com.gst.matchfinder.R
 import com.gst.matchfinder.data.Constants
+import com.gst.matchfinder.ui.message.ViewMessageActivity
+import com.gst.matchfinder.ui.wanted.MyWantedAd
 import kotlinx.coroutines.*
 import org.json.JSONObject
 import java.io.*
@@ -29,113 +26,88 @@ import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.HttpsURLConnection
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManagerFactory
-import kotlin.coroutines.CoroutineContext
 
-class LessonInfoDetailActivity : AppCompatActivity(), CoroutineScope {
-
-    private var job: Job = Job()
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+class HandOverDetailActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     lateinit var post_id: String
-    lateinit var coarse_location: String
-    lateinit var coach_name: String
-    lateinit var coach_phone: String
-    lateinit var coach_addr: String
+    lateinit var post_user_id: String
     lateinit var intro_string: String
-    lateinit var intro_file_name: String
-
-    private lateinit var mAdView: AdView
-
+    lateinit var handover_detail: String
+    var is_post_mine: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lesson_info_detail)
+        setContentView(R.layout.activity_hand_over_detail)
 
-        post_id = intent.getStringExtra("lesson_post_id").toString()
-        coarse_location = intent.getStringExtra("coarse_location").toString()
-        coach_name = intent.getStringExtra("coach_name").toString()
-        coach_phone = intent.getStringExtra("coach_phone").toString()
-        coach_addr = intent.getStringExtra("coach_addr").toString()
-        intro_string = intent.getStringExtra("intro_string").toString()
-        intro_file_name = intent.getStringExtra("intro_file_name").toString()
-
-        val intro_str_text = findViewById<TextView>(R.id.lesson_intro_string)
-        val coach_name_text = findViewById<TextView>(R.id.lesson_coach_name)
-        val coach_phone_text = findViewById<TextView>(R.id.lesson_coach_phone)
-        val coach_addr_text = findViewById<TextView>(R.id.lesson_coach_addr)
-        val lesson_pic = findViewById<ImageView>(R.id.lesson_pic)
-
-        intro_str_text.setText(intro_string)
-        coach_name_text.setText(coach_name)
-        coach_phone_text.setText(coach_phone)
-        coach_addr_text.setText(coach_addr)
-
-        launch {
-            get_lesson_detail(post_id)
+        val sharedPref = this?.getSharedPreferences("gst.loginInfo", Context.MODE_PRIVATE)
+        val sharedIdValue = sharedPref.getString("id_key","no_id")
+        if(sharedIdValue != null && sharedIdValue != "no_id"){
+            Constants.myID = sharedIdValue
         }
 
-        MobileAds.initialize(this) {}
-        mAdView = findViewById(R.id.lessonDetailPageAdView)
-        val adRequest: AdRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-    }
+        post_id = intent.getStringExtra("handover_post_id").toString()
+        post_user_id = intent.getStringExtra("post_user_id").toString()
+        intro_string = intent.getStringExtra("intro_string").toString()
+        handover_detail = intent.getStringExtra("handover_detail").toString()
 
-    private suspend fun get_lesson_detail(post_id: String){
+        val handover_intro = findViewById<TextView>(R.id.handover_intro_string)
+        val handover_captain = findViewById<TextView>(R.id.handover_name)
+        val handover_briefing = findViewById<TextView>(R.id.handover_briefing)
+        val handover_msg_button = findViewById<Button>(R.id.handover_msg_btn)
 
-        val lessonJSONObject = JSONObject()
-        lessonJSONObject.put("action","lesson_detail")
-        lessonJSONObject.put("user_id", Constants.myID)
-        lessonJSONObject.put("post_id", post_id)
-
-        val result: String? = get_lesson_detail_Helper(lessonJSONObject.toString())
-
-        if(result == null) {
-            Toast.makeText(this@LessonInfoDetailActivity, "레슨 상세 정보를 가져오지 못했습니다", Toast.LENGTH_LONG).show()
-            return
+        handover_intro.text = intro_string
+        handover_captain.text = post_user_id
+        handover_briefing.text = handover_detail
+        if(post_user_id == Constants.myID) {
+            is_post_mine = true
+            handover_msg_button.text = "이 공고 마감하기"
         } else{
-            val image_write_result: Boolean = write_image_to_disk(result, post_id)
-            
-            if(image_write_result == false){
-                Toast.makeText(this@LessonInfoDetailActivity, "레슨 상세 정보를 표시하지 못했습니다", Toast.LENGTH_LONG).show()
-                return
+            is_post_mine = false
+            handover_msg_button.text = "이 사용자에게 메세지 보내기"
+        }
+
+        handover_msg_button.setOnClickListener {
+
+            if(is_post_mine) {
+                launch {
+                    close_handover(post_id, Constants.myID)
+                }
+            } else{
+                val intent = Intent(this, ViewMessageActivity::class.java).apply {
+                    putExtra(Constants.RECEIVER_ID, post_user_id)
+                    putExtra(Constants.MY_ID, Constants.myID)
+                }
+
+                startActivity(intent)
             }
         }
+
     }
 
-    private fun write_image_to_disk(image_array_str: String, post_id: String): Boolean{
+    private suspend fun close_handover(post_id: String, myID: String){
 
-        var image_write_result: Boolean = false
+        val searchJSONObject = JSONObject()
+        searchJSONObject.put("action","close_handover")
+        searchJSONObject.put("user_id", myID)
+        searchJSONObject.put("post_id", post_id)
 
-        try {
-            val file_path_to_save: String = applicationContext.getFilesDir().getPath().toString() + "/lesson_" + post_id + ".jpg"
+        val result: Int = close_handover_Helper(searchJSONObject.toString())
+//val result: Int = Constants.WANTED_LIST_SUCCESS
+        if(result != Constants.WANTED_LIST_SUCCESS) {
+            Toast.makeText(this@HandOverDetailActivity, "공고를 마감하지 못했습니다\n잠시 후 다시 시도하십시요", Toast.LENGTH_LONG).show()
+            return
+        } else{
+            val handover_msg_button = findViewById<Button>(R.id.handover_msg_btn)
 
-            var file_byte_array = Base64.decode(image_array_str, Base64.DEFAULT)
-
-            val fos = FileOutputStream(file_path_to_save)
-            fos.write(file_byte_array)
-            fos.close()
-
-            var imgFile = File(file_path_to_save)
-
-            val myBitmap: Bitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
-
-            val lesson_pic = findViewById<ImageView>(R.id.lesson_pic)
-            lesson_pic.setImageBitmap(myBitmap)
-
-            image_write_result = true
-            //}
-        } catch(e: Exception){
-            e.printStackTrace()
+            handover_msg_button.setText("마감된 공고입니다")
+            handover_msg_button.isEnabled = false
         }
-
-        return image_write_result
     }
 
-    private suspend fun get_lesson_detail_Helper(search_info: String): String?{
+    private suspend fun close_handover_Helper(search_info: String): Int{
         return withContext(Dispatchers.Default){ // withContext - suspends until it completes and returns results
             // withContext might be replaced by withTimeout which suspends only for given time period
-            var get_list_return_val: String? = null
+            var get_list_return_val: Int = Constants.WANTED_LIST_FAIL
             val postData: ByteArray = search_info.toByteArray(StandardCharsets.UTF_8)
 
             // Load CAs from an InputStream
@@ -204,14 +176,12 @@ class LessonInfoDetailActivity : AppCompatActivity(), CoroutineScope {
 
                     val searchResultObject = JSONObject(search_result_json)
 
-                    val lesson_ad_list_result: String = searchResultObject.getString("lesson_detail_result")
+                    val wanted_ad_list_result: String = searchResultObject.getString("close_handover_result")
 
-                    if (lesson_ad_list_result.equals("success")) {
-
-                        get_list_return_val = searchResultObject.getString("data")
-
+                    if (wanted_ad_list_result.equals("success")) {
+                        get_list_return_val = Constants.WANTED_LIST_SUCCESS
                     } else {
-                        get_list_return_val = null
+                        get_list_return_val = Constants.WANTED_LIST_FAIL
                     }
 
                     reader.close()
@@ -220,15 +190,15 @@ class LessonInfoDetailActivity : AppCompatActivity(), CoroutineScope {
                 } else{
                     val errorstream: DataInputStream = DataInputStream(httpClient.errorStream)
 
-                    get_list_return_val = null
+                    get_list_return_val = Constants.WANTED_LIST_SERVER_ERROR
                 }
 
                 return@withContext get_list_return_val
 
             } catch(e: SocketTimeoutException){
-                return@withContext null
+                return@withContext Constants.WANTED_LIST_NETWORK_ERROR
             } catch(e: Exception){
-                return@withContext null
+                return@withContext Constants.WANTED_LIST_NETWORK_ERROR
             }
         }
     }
@@ -241,9 +211,10 @@ class LessonInfoDetailActivity : AppCompatActivity(), CoroutineScope {
 
 
 
-
-
 }
+
+
+
 
 
 

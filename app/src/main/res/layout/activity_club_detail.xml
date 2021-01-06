@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.club.ClubDetailActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/clubDetailNestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clubDetailConstraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <TextView
+                android:id="@+id/club_intro_string"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/club_captain_name_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="동호회 책임자"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/club_intro_string" />
+
+            <TextView
+                android:id="@+id/club_captain_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:textAlignment="viewStart"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/club_captain_name_tag"
+                app:layout_constraintTop_toBottomOf="@+id/club_intro_string" />
+
+            <Button
+                android:id="@+id/club_msg_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:text="메세지 보내기"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@+id/club_captain_name"
+                app:layout_constraintTop_toBottomOf="@+id/club_intro_string" />
+
+            <TextView
+                android:id="@+id/club_briefing_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:text="모집 요강"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/club_captain_name_tag" />
+
+            <TextView
+                android:id="@+id/club_briefing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textAlignment="viewStart"
+                android:textColor="#000000"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/club_briefing_tag" />
+
+            <ImageView
+                android:id="@+id/club_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="2dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitStart"
+                android:scaleX="1"
+                android:scaleY="1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/club_briefing" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

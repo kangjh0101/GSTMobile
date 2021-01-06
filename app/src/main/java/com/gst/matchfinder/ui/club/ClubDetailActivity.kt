@@ -1,20 +1,19 @@
-package com.gst.matchfinder.ui.lesson
+package com.gst.matchfinder.ui.club
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
-import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 import com.gst.matchfinder.R
 import com.gst.matchfinder.data.Constants
+import com.gst.matchfinder.ui.message.ViewMessageActivity
 import kotlinx.coroutines.*
 import org.json.JSONObject
 import java.io.*
@@ -29,75 +28,75 @@ import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.HttpsURLConnection
 import javax.net.ssl.SSLContext
 import javax.net.ssl.TrustManagerFactory
-import kotlin.coroutines.CoroutineContext
 
-class LessonInfoDetailActivity : AppCompatActivity(), CoroutineScope {
-
-    private var job: Job = Job()
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+class ClubDetailActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     lateinit var post_id: String
-    lateinit var coarse_location: String
-    lateinit var coach_name: String
-    lateinit var coach_phone: String
-    lateinit var coach_addr: String
+    lateinit var post_user_id: String
     lateinit var intro_string: String
-    lateinit var intro_file_name: String
-
-    private lateinit var mAdView: AdView
-
+    lateinit var club_detail: String
+    lateinit var data_format: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lesson_info_detail)
+        setContentView(R.layout.activity_club_detail)
 
-        post_id = intent.getStringExtra("lesson_post_id").toString()
-        coarse_location = intent.getStringExtra("coarse_location").toString()
-        coach_name = intent.getStringExtra("coach_name").toString()
-        coach_phone = intent.getStringExtra("coach_phone").toString()
-        coach_addr = intent.getStringExtra("coach_addr").toString()
-        intro_string = intent.getStringExtra("intro_string").toString()
-        intro_file_name = intent.getStringExtra("intro_file_name").toString()
-
-        val intro_str_text = findViewById<TextView>(R.id.lesson_intro_string)
-        val coach_name_text = findViewById<TextView>(R.id.lesson_coach_name)
-        val coach_phone_text = findViewById<TextView>(R.id.lesson_coach_phone)
-        val coach_addr_text = findViewById<TextView>(R.id.lesson_coach_addr)
-        val lesson_pic = findViewById<ImageView>(R.id.lesson_pic)
-
-        intro_str_text.setText(intro_string)
-        coach_name_text.setText(coach_name)
-        coach_phone_text.setText(coach_phone)
-        coach_addr_text.setText(coach_addr)
-
-        launch {
-            get_lesson_detail(post_id)
+        val sharedPref = this?.getSharedPreferences("gst.loginInfo", Context.MODE_PRIVATE)
+        val sharedIdValue = sharedPref.getString("id_key","no_id")
+        if(sharedIdValue != null && sharedIdValue != "no_id"){
+            Constants.myID = sharedIdValue
         }
 
-        MobileAds.initialize(this) {}
-        mAdView = findViewById(R.id.lessonDetailPageAdView)
-        val adRequest: AdRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
+        post_id = intent.getStringExtra("club_post_id").toString()
+        post_user_id = intent.getStringExtra("post_user_id").toString()
+        intro_string = intent.getStringExtra("intro_string").toString()
+        club_detail = intent.getStringExtra("club_detail").toString()
+        data_format = intent.getStringExtra("data_format").toString()
+
+        val club_intro = findViewById<TextView>(R.id.club_intro_string)
+        val club_captain = findViewById<TextView>(R.id.club_captain_name)
+        val club_briefing = findViewById<TextView>(R.id.club_briefing)
+        val club_msg_button = findViewById<Button>(R.id.club_msg_btn)
+
+        club_intro.text = intro_string
+        club_captain.text = post_user_id
+        club_briefing.text = club_detail
+
+        if(!data_format.equals("no_pic")) {
+            launch {
+                get_club_detail(post_id)
+            }
+        }
+
+        club_msg_button.setOnClickListener {
+            val intent = Intent(this, ViewMessageActivity::class.java).apply {
+                putExtra(Constants.RECEIVER_ID, post_user_id)
+                putExtra(Constants.MY_ID, Constants.myID)
+            }
+
+            if(!post_user_id.equals(Constants.myID)) startActivity(intent)
+        }
+
+
     }
 
-    private suspend fun get_lesson_detail(post_id: String){
+    private suspend fun get_club_detail(post_id: String){
 
         val lessonJSONObject = JSONObject()
-        lessonJSONObject.put("action","lesson_detail")
+        lessonJSONObject.put("action","club_detail")
         lessonJSONObject.put("user_id", Constants.myID)
         lessonJSONObject.put("post_id", post_id)
 
-        val result: String? = get_lesson_detail_Helper(lessonJSONObject.toString())
+        val result: String? = get_club_detail_Helper(lessonJSONObject.toString())
 
         if(result == null) {
-            Toast.makeText(this@LessonInfoDetailActivity, "레슨 상세 정보를 가져오지 못했습니다", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@ClubDetailActivity, "레슨 상세 정보를 가져오지 못했습니다", Toast.LENGTH_LONG).show()
             return
         } else{
             val image_write_result: Boolean = write_image_to_disk(result, post_id)
-            
+
             if(image_write_result == false){
-                Toast.makeText(this@LessonInfoDetailActivity, "레슨 상세 정보를 표시하지 못했습니다", Toast.LENGTH_LONG).show()
+                Toast.makeText(this@ClubDetailActivity, "레슨 상세 정보를 표시하지 못했습니다", Toast.LENGTH_LONG).show()
                 return
             }
         }
@@ -108,7 +107,7 @@ class LessonInfoDetailActivity : AppCompatActivity(), CoroutineScope {
         var image_write_result: Boolean = false
 
         try {
-            val file_path_to_save: String = applicationContext.getFilesDir().getPath().toString() + "/lesson_" + post_id + ".jpg"
+            val file_path_to_save: String = applicationContext.getFilesDir().getPath().toString() + "/club_" + post_id + ".jpg"
 
             var file_byte_array = Base64.decode(image_array_str, Base64.DEFAULT)
 
@@ -120,7 +119,7 @@ class LessonInfoDetailActivity : AppCompatActivity(), CoroutineScope {
 
             val myBitmap: Bitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
 
-            val lesson_pic = findViewById<ImageView>(R.id.lesson_pic)
+            val lesson_pic = findViewById<ImageView>(R.id.club_pic)
             lesson_pic.setImageBitmap(myBitmap)
 
             image_write_result = true
@@ -132,7 +131,7 @@ class LessonInfoDetailActivity : AppCompatActivity(), CoroutineScope {
         return image_write_result
     }
 
-    private suspend fun get_lesson_detail_Helper(search_info: String): String?{
+    private suspend fun get_club_detail_Helper(search_info: String): String?{
         return withContext(Dispatchers.Default){ // withContext - suspends until it completes and returns results
             // withContext might be replaced by withTimeout which suspends only for given time period
             var get_list_return_val: String? = null
@@ -232,18 +231,22 @@ class LessonInfoDetailActivity : AppCompatActivity(), CoroutineScope {
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

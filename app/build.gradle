@@ -46,6 +46,17 @@ android {
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
+
+    /*configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == "androidx.appcompat") {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion "1.+"
+                }
+            }
+        }
+    }*/
 }
 
 dependencies {

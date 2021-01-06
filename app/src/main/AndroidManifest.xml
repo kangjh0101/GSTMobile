@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -17,7 +18,13 @@
         android:roundIcon="@drawable/gst_155x155_01"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.lesson.LessonLocationActivity"></activity>
+        <activity android:name=".ui.hand_over.HandOverDetailActivity"></activity>
+        <activity android:name=".ui.hand_over.HandOverAdActivity" />
+        <activity android:name=".ui.hand_over.HandOverListActivity" />
+        <activity android:name=".ui.club.ClubDetailActivity" />
+        <activity android:name=".ui.club.ClubAdActivity" />
+        <activity android:name=".ui.club.ClubListActivity" />
+        <activity android:name=".ui.lesson.LessonLocationActivity" />
         <activity android:name=".ui.lesson.LessonInfoDetailActivity" />
         <activity android:name=".ui.lesson.LessonInfoActivity" />
         <activity android:name=".ui.main.MainMenuV2Activity" /> <!-- android:launchMode="singleInstance" -->

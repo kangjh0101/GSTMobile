@@ -25,6 +25,8 @@ import com.gst.matchfinder.data.Constants
 import com.gst.matchfinder.db.MessageDB
 import com.gst.matchfinder.db.MessageEntry
 import com.gst.matchfinder.ui.bug_report.BugReportActivity
+import com.gst.matchfinder.ui.club.ClubListActivity
+import com.gst.matchfinder.ui.hand_over.HandOverListActivity
 import com.gst.matchfinder.ui.lesson.LessonInfoActivity
 import com.gst.matchfinder.ui.lesson.LessonLocationActivity
 import com.gst.matchfinder.ui.message.Message
@@ -87,6 +89,8 @@ class MainMenuV2Activity : AppCompatActivity(), CoroutineScope by MainScope(), L
         val less_coach_page = findViewById<ImageButton>(R.id.lesson_btn)
         val bug_report_page = findViewById<ImageButton>(R.id.report_btn)
         val withdraw_page = findViewById<ImageButton>(R.id.drop_btn)
+        val club_page = findViewById<ImageButton>(R.id.club_btn)
+        val hand_over_page = findViewById<ImageButton>(R.id.hand_over_btn)
 
         wanted_ad_page.setOnClickListener{
             val intent = Intent(this, MainPageActivity::class.java).apply {
@@ -120,6 +124,18 @@ class MainMenuV2Activity : AppCompatActivity(), CoroutineScope by MainScope(), L
         less_coach_page.setOnClickListener{
             val lesson_job = launch {
                 lesson_info()
+            }
+        }
+
+        club_page.setOnClickListener {
+            val lesson_job = launch {
+                club_list()
+            }
+        }
+
+        hand_over_page.setOnClickListener {
+            val lesson_job = launch {
+                hand_over_list()
             }
         }
 
@@ -373,6 +389,22 @@ class MainMenuV2Activity : AppCompatActivity(), CoroutineScope by MainScope(), L
     private fun lesson_info(){
 
         val intent = Intent(this, LessonLocationActivity::class.java).apply {
+            //putExtra(Constants.MY_ID, myID)
+        }
+        startActivity(intent)
+    }
+
+    private fun club_list(){
+
+        val intent = Intent(this, ClubListActivity::class.java).apply {
+            //putExtra(Constants.MY_ID, myID)
+        }
+        startActivity(intent)
+    }
+
+    private fun hand_over_list(){
+
+        val intent = Intent(this, HandOverListActivity::class.java).apply {
             //putExtra(Constants.MY_ID, myID)
         }
         startActivity(intent)

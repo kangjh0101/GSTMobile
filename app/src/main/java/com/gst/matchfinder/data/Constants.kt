@@ -1,6 +1,8 @@
 package com.gst.matchfinder.data
 
 import com.gst.matchfinder.db.MessageDB
+import com.gst.matchfinder.ui.club.ClubAd
+import com.gst.matchfinder.ui.hand_over.HandOver
 import com.gst.matchfinder.ui.lesson.LessonAd
 import com.gst.matchfinder.ui.main.WantedAd
 import com.gst.matchfinder.ui.message.Message
@@ -181,6 +183,12 @@ class Constants {
 
         var lessonAdList: ArrayList<String> = arrayListOf("레슨 공고 확인하기", "")
         var lessonAdStruc: ArrayList<LessonAd> = arrayListOf(LessonAd("","", "", "", "", "", ""))
+
+        var clubAdList: ArrayList<String> = arrayListOf("동호회 모집 공고 확인하기", "")
+        var clubAdStruc: ArrayList<ClubAd> = arrayListOf(ClubAd("","", "", "", ""))
+
+        var handoverAdList: ArrayList<String> = arrayListOf("코트 양도 공고 확인하기", "")
+        var handoverAdStruc: ArrayList<HandOver> = arrayListOf(HandOver("","", "", ""))
 
         var myMessageList: ArrayList<String> = arrayListOf("내 메세지 확인하기", "")
         var myMessageStruc: ArrayList<Message> = arrayListOf(Message("", 0, null))
