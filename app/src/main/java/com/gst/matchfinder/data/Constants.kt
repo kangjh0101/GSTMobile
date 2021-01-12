@@ -59,7 +59,7 @@ class Constants {
         lateinit var myID: String
 
         const val app_package_name = "com.gst.matchfinder"
-        const val app_version = "2.0.0"
+        const val app_version = "3.0.0"
 
         const val MY_ID = "my.id"
         const val POST_ID = "post.id"
